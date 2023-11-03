@@ -1,6 +1,6 @@
 package mypkg;
 
-public class bookbean {
+public class BookBean {
 	private String title;
 	private String author;
 	private String publisher;
@@ -8,9 +8,14 @@ public class bookbean {
 	private String buy;
 	private String kind;
 	private String count;
-	public bookbean() {
+	private String[] bookstore;
+	public String[] getBookstore() {
+		return bookstore;
 	}
-	public bookbean(String title, String author, String publisher, int price, String buy, String kind, String count) {
+	public void setBookstore(String[] bookstore) {
+		this.bookstore = bookstore;
+	}
+	public BookBean(String title, String author, String publisher, int price, String buy, String kind, String count) {
 		this.title = title;
 		this.author = author;
 		this.publisher = publisher;
@@ -18,6 +23,9 @@ public class bookbean {
 		this.buy = buy;
 		this.kind = kind;
 		this.count = count;
+	}
+	public BookBean() {
+		// TODO Auto-generated constructor stub
 	}
 	public String getTitle() {
 		return title;
