@@ -3,6 +3,8 @@ package myPkg;
 import java.io.IOException;
 
 import javax.servlet.RequestDispatcher;
+import javax.servlet.Servlet;
+import javax.servlet.ServletConfig;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -15,15 +17,27 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/insert")
 public class InsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public InsertServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public InsertServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @see Servlet#init(ServletConfig)
+	 */
+	public void init(ServletConfig config) throws ServletException {
+		// TODO Auto-generated method stub
+	}
+
+	/**
+	 * @see Servlet#destroy()
+	 */
+	public void destroy() {
+		// TODO Auto-generated method stub
+	}
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
@@ -37,20 +51,23 @@ public class InsertServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("UTF-8");
-	      response.setContentType("text/html;charset=UTF-8");
-	      String[] hobby =request.getParameterValues("hobby");
-	      String hbs="";
-	      for(String i : hobby) {
-	    	  hbs+=i+" ";
-	      }
-	      String birth1 =request.getParameter("birth1");
-	      String birth2 =request.getParameter("birth2");
-	      String birth3 =request.getParameter("birth3");
-	      String birth = birth1+"년 "+birth2+"월 "+birth3+"일";
-	      request.setAttribute("hbs", hbs);
-		request.setAttribute("birth", birth);
-	  	RequestDispatcher dispatcher = request.getRequestDispatcher("result_김노아.jsp");
+		InsertBean eb = new InsertBean();
+		eb.setId(request.getParameter("id")); 
+		eb.setPassword(request.getParameter("password")); 
+		eb.setName(request.getParameter("name"));
+		eb.setYear(request.getParameter("year"));
+		eb.setMonth(request.getParameter("month"));
+		eb.setDay(request.getParameter("day"));
+		String[] arr = request.getParameterValues("hobby");
+		eb.setHobby(arr);
+		eb.setC(Integer.parseInt(request.getParameter("c")));
+		eb.setJava(Integer.parseInt(request.getParameter("java")));
+		eb.setJsp(Integer.parseInt(request.getParameter("jsp")));
+
+		request.setAttribute("eb", eb);
+		RequestDispatcher dispatcher = request.getRequestDispatcher("Ex03_result.jsp");
 		dispatcher.forward(request, response);
+
 	}
 
 }

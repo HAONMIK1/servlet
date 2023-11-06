@@ -29,8 +29,20 @@ public class RegisteServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		CoffeeBean cb = new CoffeeBean();
+		cb.setName(request.getParameter("name"));
+		cb.setCoffee(request.getParameter("coffee"));
+		String Cname = request.getParameter("name");
+		String[] Ccoffee = request.getParameterValues("coffee");
+		
+		request.setAttribute("cb", cb);
+		request.setAttribute("Cname", Cname);
+		request.setAttribute("Ccoffee", Ccoffee);
+		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("register_result.jsp");
+		dispatcher.forward(request, response);
 	}
 
 	/**

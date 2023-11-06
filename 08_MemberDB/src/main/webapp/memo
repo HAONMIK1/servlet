@@ -1,0 +1,19 @@
+drop sequence seqmem;
+create sequence seqmem
+	start with 1
+	minvalue 1
+	increment by 1
+	nocache;
+	
+drop table member;
+create table member(
+	id member primary key,
+	name varchar2(20),
+	password varchar2(20)
+);
+
+insert into member values(seqmem.nextval, '정국','1234');
+insert into member values(seqmem.nextval, '수지','5678');
+
+ commit;
+ select * from member;

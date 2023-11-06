@@ -35,7 +35,7 @@ if (travel === "") {
 return true;
 }
 </script>
-<form name="frm" method="post" action="rServlet">
+<form name="frm" method="get" action="rServlet">
 										
 	이름 : <input type="text" name="name"><br><br>
 	나이 : <input type="text" name="age"><br><br>
