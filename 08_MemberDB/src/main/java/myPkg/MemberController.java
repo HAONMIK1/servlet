@@ -56,10 +56,31 @@ public class MemberController extends HttpServlet {
 			mb.setName(request.getParameter("name"));
 			mb.setPassword(request.getParameter("password"));
 			int cnt =dao.insertMember(mb);
+			
+		}else if(command.equals("/updateForm.mb")) {
+			System.out.println("update.mb 요청");
+			String id =request.getParameter("id");
+			MemberBean mb=dao.getOneSelect(id);
+			
+			request.setAttribute("mb", mb);
+			viewPage = "updateForm.jsp";
+			
 		}else if(command.equals("/update.mb")) {
 			System.out.println("update.mb 요청");
+			MemberBean mb = new MemberBean();
+			
+			mb.setId(request.getParameter("id"));
+			mb.setName(request.getParameter("name"));
+			mb.setPassword(request.getParameter("password"));
+			
+			dao.updateMember(mb);
+			viewPage = "/select.mb";
+			
 		}else if(command.equals("/delete.mb")) {
 			System.out.println("delete.mb 요청");
+			String id =request.getParameter("id");
+			dao.deleteMember(id);
+			viewPage = "/select.mb";
 			
 		}else if(command.equals("/select.mb")) {
 			System.out.println("select.mb 요청");

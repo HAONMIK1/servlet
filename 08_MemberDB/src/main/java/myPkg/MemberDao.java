@@ -70,8 +70,8 @@ public class MemberDao {
 		}	
 		return list;
 	}
-	public int deletMember(String id)  {
-		int cnt =0;
+	public int deleteMember(String id)  {
+		int cnt = 0;
 		String sql = "delete from member where id = ?";
 		try {
 			ps = conn.prepareStatement(sql);
@@ -89,12 +89,14 @@ public class MemberDao {
 		}
 		return cnt;
 	}
-	public int updateMember(String id)  {
+	public int updateMember(MemberBean mb)  {
 		int cnt =0;
-		String sql = "update member set where id = ?";
+		String sql = "update member set name =? , password = ? where id = ?";
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setString(1,id);
+			ps.setString(1,mb.getName());
+			ps.setString(2,mb.getPassword());
+			ps.setString(3,mb.getId());
 			cnt =ps.executeUpdate();
 		}catch (Exception e) {
 			// TODO: handle exception
@@ -107,5 +109,29 @@ public class MemberDao {
 			}
 		}
 		return cnt;
+	}
+	public MemberBean getOneSelect(String id) {
+		MemberBean mb =new MemberBean();
+		String sql = "select  * from member where id = ?";
+		try {
+		ps= conn.prepareStatement(sql);
+		ps.setString(1,id);
+		rs=ps.executeQuery();
+		if(rs.next()) {
+			mb.setId(rs.getString("id"));
+			mb.setName(rs.getString("name"));
+			mb.setPassword(rs.getString("password"));
+		}
+		}catch (Exception e) {
+			// TODO: handle exception
+		}	finally {
+			try {
+				ps.close();
+				conn.close();
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}	
+		return mb;
 	}
 }

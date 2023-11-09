@@ -17,3 +17,17 @@ insert into member values(seqmem.nextval, '수지','5678');
 
  commit;
  select * from member;
+ 
+<!-- 
+[Get방식]
+1.웹브라우저의 주소표시줄에 직접 URL을 입력하는 경우
+2.a태그를 통한 요청
+3.location 객체를 통한 요청
+4.form method="get"
+
+
+[Post방식]
+form method="post"
+
+서블릿에서 forward()로 다시 서블릿을 요청할떄에 이전 요청 방식을 따른다.
+ -->

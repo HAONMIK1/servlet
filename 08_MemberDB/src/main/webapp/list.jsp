@@ -4,16 +4,20 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 list.jsp
+<!-- 
 pagecontext.setAttribute() : pageScope
 request.setAttribute()		: requestScope
 session.setAttribute()		: sessionScope
 application.setAttribute()	: applicationScope
 pagecontext< request < session < application 사용범위 넓어짐
+-->
 <table border="1">
 <tr>
 <th>아이디</th>
 <th>이름</th>
 <th>비밀번호</th>
+<th>삭제</th>
+<th>수정</th>
 </tr>
 <c:forEach var="mb" items="${list}" varStatus="status">
 <tr>
@@ -26,6 +30,8 @@ ${mb.name}
 <td>
 ${mb.password}
 </td>
+<td><a href="delete.mb?id=${mb.id}">삭제</a></td>
+<td><a href="updateForm.mb?id=${mb.id}">수정</a></td>
 </tr>
 </c:forEach>
 </table>
@@ -42,6 +48,8 @@ ${mb.password}
 <th>아이디</th>
 <th>이름</th>
 <th>비밀번호</th>
+<th>삭제</th>
+<th>수정</th>
 </tr>
 <c:forEach var="mb" items="${pageScope.lists }" varStatus="status">
 <%-- <c:forEach var="mb" items="<%=lists %>" varStatus="status"> --%>
@@ -55,6 +63,9 @@ ${mb.name}
 <td>
 ${mb.password}
 </td>
+<td><a href="delete.mb?id=${mb.id}">삭제</a></td>
+<td><a href="updateForm.mb?id=${mb.id}">수정</a></td>
 </tr>
 </c:forEach>
 </table>
+<a href="insertForm.jsp">등록</a>
